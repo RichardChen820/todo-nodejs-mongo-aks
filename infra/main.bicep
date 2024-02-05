@@ -90,13 +90,15 @@ module azappconfig './core/config/azure-appconfig.bicep' = {
     tags: tags
     keyValueNames: [
       'REACT_APP_APPLICATIONINSIGHTS_CONNECTION_STRING$todo-web'
-      'APPLICATIONINSIGHTS_CONNECTION_STRING$todo-api'
-      'AZURE_COSMOS_DATABASE_NAME$todo-api'
+      'observability:connectionString$todo-api'
+      'database:databaseName$todo-api'
+      'observability:roleName$todo-api'
     ]
     keyValueValues: [
       monitoring.outputs.applicationInsightsConnectionString
       monitoring.outputs.applicationInsightsConnectionString
       cosmos.outputs.databaseName
+      'API'
     ]
     keyVaultURI: keyVault.outputs.endpoint
   }

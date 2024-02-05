@@ -9,7 +9,10 @@ export const getConfig: () => Promise<AppConfig> = async () => {
         dotenv.config();
     }
 
-    // Load configuration after Azure KeyVault population is complete
+    logger.warn(__dirname);
+
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    process.env.NODE_CONFIG_DIR="./config" + require("path").delimiter + "./configDir";
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const config: IConfig = require("config") as IConfig;
     const databaseConfig = config.get<DatabaseConfig>("database");

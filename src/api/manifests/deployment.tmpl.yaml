@@ -20,8 +20,16 @@ spec:
           envFrom:
           - secretRef:
               name: todo-api-secret
-          - configMapRef:
-              name: todo-api-config
           env:
             - name: AZURE_CLIENT_ID
               value: {{.Env.AZURE_AKS_IDENTITY_CLIENT_ID}}
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/configDir
+      volumes:
+        - name: config-volume
+          configMap:
+            name: todo-api-config
+            items:
+              - key: default.json
+                path: default.json
